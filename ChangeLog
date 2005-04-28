@@ -1,0 +1,14 @@
+Version 0.3 -- Fri, 11 Mar 2005 21:58:55 +0100
+	* image.c: - Unload only when image is downloaded
+	           - Bugfixes
+	* telak.c: Add support for at least Nautilus root window
+	* Improve manpage
+
+Version 0.2 -- Tue,  8 Feb 2005 14:11:31 +0100
+	* Fix Makefile
+	* Some code cleanup
+	* Speed up parser
+	* Add support for reverse mode
+
+Version 0.1 -- Tue,  7 Feb 2005 23:11:31 +0100
+	* Initial release

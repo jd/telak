@@ -1,0 +1,23 @@
+# telakrc.sample
+# Edit this.
+
+[acid]
+url = http://naquadah.org/~acid/images/acid.jpg
+width = 200
+height = 300
+x = 100
+y = 100
+reverse = 1
+
+[test]
+url = /home/staff/acid/test.jpg
+width = 100
+height = 100
+x = 800
+y = 600
+
+[cacti]
+url = http://nasya.dmz.naquadah.org/cacti/graph_image.php?local_graph_id=173&rra_id=1&graph_start=-60000&graph_height=60&graph_width=300&graph_nolegend=true
+x = 300
+y = 200
+refresh = 300
