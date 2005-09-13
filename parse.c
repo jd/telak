@@ -17,6 +17,7 @@
 #include <sys/types.h>
 #include <pwd.h>
 #include <time.h>
+#include <sys/time.h>
 
 #include "telak.h"
 #include "image.h"
