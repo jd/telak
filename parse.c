@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <time.h>
 
 #include "telak.h"
 #include "image.h"
