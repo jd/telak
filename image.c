@@ -204,7 +204,7 @@ load_img(struct deskitem *img)
 	  hash_size = gcry_md_get_algo_dlen(GCRY_MD_MD5);
 	  
 	  /* Compute md5 hash of url */
-	  buf = (char *) malloc(hash_size * sizeof(char));
+	  buf = (unsigned char *) malloc(hash_size * sizeof(unsigned char));
 	  md5 = (char *) malloc(sizeof(char) * (hash_size * 2 + 1));
 	  
 	  gcry_md_hash_buffer(GCRY_MD_MD5, buf, (char *) img->url, strlen(img->url));
