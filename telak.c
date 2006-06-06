@@ -25,6 +25,7 @@
 #include "telak.h"
 #include "parse.h"
 #include "image.h"
+#include "toon.h"
 
 extern char *optarg;
 extern int optind, opterr, optopt;
@@ -84,65 +85,12 @@ version()
   exit(EXIT_SUCCESS);
 }
 
-static void
-find_root_window(Display *display)
-{
-  if (!win)
-    {
-      Atom SWM_VROOT = XInternAtom(display, "__SWM_VROOT", False);
-      Atom NAUTILUS_DESKTOP_WINDOW_ID =
-		XInternAtom(display, "NAUTILUS_DESKTOP_WINDOW_ID", False);
-      win = DefaultRootWindow(display);
-
-      Window unused, *windows = 0;
-      unsigned int count;
-
-      Atom type;
-      int format;
-      unsigned long nitems, bytes_after_return;
-      unsigned char *virtual_root_window;
-
-      if(XGetWindowProperty(display, win, NAUTILUS_DESKTOP_WINDOW_ID,
-							0, 1, False, XA_WINDOW, &type, &format,
-							&nitems, &bytes_after_return,
-							&virtual_root_window) == Success
-		 && type == XA_WINDOW)
-	  {
-		if(XQueryTree(display, *(Window *) virtual_root_window, &unused, &unused, &windows, &count))
-		  win = windows[count - 1];
-		
-		XFree (virtual_root_window);
-	  }
-      else if(XQueryTree(display, win, &unused, &unused, &windows, &count))
-	  {
-		unsigned int i;
-		
-		for (i = 0; i < count; i++)
-		{
-		  if (XGetWindowProperty (display, windows[i], SWM_VROOT,
-								  0, 1, False, XA_WINDOW, &type, &format,
-								  &nitems, &bytes_after_return,
-								  &virtual_root_window) == Success
-			  && type == XA_WINDOW)
-		  {
-			win = *(Window *)virtual_root_window;
-			XFree (virtual_root_window);
-			break;
-		  }
-		}
-		
-		XFree(windows);
-	  }
-      else
-        fprintf(stderr, "Can't query tree on root window 0x%lx", win);
-    }
-}
-
-
 
 void
 init_x()
 {
+  Window parent;
+
   /* open a connection to the X server */
   if(!(disp = XOpenDisplay(conf.display)))
   {
@@ -153,7 +101,9 @@ init_x()
   /* get default visual , colormap etc. you could ask imlib2 for what it */
   vis = DefaultVisual(disp, DefaultScreen(disp));
   cm = DefaultColormap(disp, DefaultScreen(disp));
-  find_root_window(disp);
+
+  /* Get root window */
+  win = ToonGetRootWindow(disp, DefaultScreen(disp), &parent);
  
   /* We will redraw on exposure */
   XSelectInput(disp, win, ExposureMask);
