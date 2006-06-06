@@ -1,6 +1,7 @@
 Version 0.5 -- Tue, 13 Sep 2005 20:03:20 +0200
 	* parser.c: Also include sys/time.h :-)
-	* Use toon to grab root window
+	* Use toon to grab root window,
+	  better support of kde/gnome/xfce/whatever
 
 Version 0.4 -- Tue, 13 Sep 2005 18:11:38 +0200
 	* parser.c: - Include time.h (fix build error on freebsd)
