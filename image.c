@@ -1,6 +1,6 @@
 /*
  * telak - A program that display pictures in root window
- * (c) 2005 - Julien Danjou <julien@danjou.info>
+ * (c) 2005, 2006 - Julien Danjou <julien@danjou.info>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2, as
@@ -91,8 +91,8 @@ draw()
 	probe = head;
 	do
 	{
-	  if(probe->refresh != 0 &&
-		 tv_current.tv_sec - probe->tv.tv_sec >= probe->refresh)
+	  if(probe->refresh &&
+	     tv_current.tv_sec - probe->tv.tv_sec >= probe->refresh)
 	  {
 		load_img(probe);
 		
@@ -218,7 +218,7 @@ load_img(struct deskitem *img)
 	  md5[hash_size*2] = '\0';
 	  
 	  img->file = (char *) malloc(sizeof(char) *
-								  (strlen(conf.cache_dir) + strlen(md5) + 2));
+				      (strlen(conf.cache_dir) + strlen(md5) + 2));
 	  strcpy(img->file, conf.cache_dir);
 	  strcat(img->file, "/");
 	  strcat(img->file, md5);
@@ -260,13 +260,12 @@ load_img(struct deskitem *img)
 	imlib_context_set_image(img->image);
 	img->loaded = 1;
 
-	color_mod = imlib_create_color_modifier();
-	imlib_context_set_color_modifier(color_mod);
-	imlib_reset_color_modifier();
-
-
 	if(img->reverse)
 	{
+	  color_mod = imlib_create_color_modifier();
+	  imlib_context_set_color_modifier(color_mod);
+	  imlib_reset_color_modifier();
+	  
 	  imlib_get_color_modifier_tables(r_table, g_table, b_table, a_table);
 	  
 	  for(i = 0; i <= 255; i++)
@@ -279,9 +278,9 @@ load_img(struct deskitem *img)
 	  imlib_set_color_modifier_tables(r_table, g_table, b_table, a_table);
 	  
 	  imlib_apply_color_modifier();
+	  
+	  imlib_free_color_modifier();
 	}
-	
-	imlib_free_color_modifier();
 	
 	return 0;
   }
