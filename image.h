@@ -11,6 +11,7 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+void refresh(int);
 void draw();
 int load(struct deskitem * img);
 int load_img(struct deskitem * img);

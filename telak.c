@@ -11,6 +11,7 @@
 
 #define _GNU_SOURCE
 
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -51,6 +52,11 @@ main(int argc, char **argv)
 
   /* Make conf */
   make_conf(argc, argv);
+
+  /* Register signal handler */
+  struct sigaction sigact = { .sa_handler = refresh, .sa_flags = 0 };
+  sigemptyset (&sigact.sa_mask);
+  sigaction(SIGUSR1, &sigact, NULL);
 
   init_x();
 

@@ -48,6 +48,13 @@ display(struct deskitem *di)
 }
 
 void
+refresh(int signal __attribute__ ((unused)))
+{
+  load_img(head);
+  display(head);
+}
+
+void
 draw()
 {
   struct deskitem *probe;
