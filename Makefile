@@ -1,7 +1,7 @@
 VERSION = $(shell grep '^Version' ChangeLog | head -n 1 | cut -d' ' -f2 | tr -d ' ')
 BIN = telak
 O = telak.o fetch.o image.o parse.o toon.o
-LDFLAGS = $(shell imlib2-config --libs) $(shell curl-config --libs) -lgcrypt
+LDFLAGS = $(shell imlib2-config --libs) $(shell curl-config --libs) -lgcrypt -lX11
 CFLAGS = -pg -W -Wall $(shell curl-config --cflags) $(shell imlib2-config --cflags) -DTELAK_USER_AGENT="\"$(BIN) $(VERSION)\"" -DTELAK_VERSION="\"$(VERSION)\"" -g
 
 BINDIR=$(DESTDIR)/usr/bin
