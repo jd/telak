@@ -42,6 +42,8 @@ struct config
   char *cache_dir;
 };
 
+Window ToonGetRootWindow(Display *display, int screen, Window *clientparent);
+
 void make_conf(int argc, char **argv);
 void init_x();
 void check_cache_dir();

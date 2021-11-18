@@ -10,7 +10,7 @@ INSTALL = install
 MAN=telak.1
 
 $(BIN): $(O)
-	$(CC) $(LDFLAGS) -o $(BIN) $(O)
+	$(CC) -o $(BIN) $(O) $(LDFLAGS)
 
 install: $(BIN)
 	$(INSTALL) -d -m 755 $(BINDIR)

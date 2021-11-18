@@ -26,7 +26,6 @@
 #include "telak.h"
 #include "parse.h"
 #include "image.h"
-#include "toon.h"
 
 extern char *optarg;
 extern int optind, opterr, optopt;
