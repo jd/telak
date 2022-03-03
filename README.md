@@ -1,4 +1,5 @@
 # Telak
+[![Packaging status](https://repology.org/badge/tiny-repos/telak.svg)](https://repology.org/project/telak/versions)
 
 _telak_ is a small tool to draw local or remote pictures on your X11 root window.
 
